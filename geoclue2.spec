@@ -1,12 +1,13 @@
 Summary:	Geoinformation service
 Name:		geoclue2
-Version:	2.0.0
-Release:	1
-Source0:	http://www.freedesktop.org/software/geoclue/releases/2.0/geoclue-%{version}.tar.xz
-# Source0-md5:	401ff99d530b177c62afacef0a33efd9
+Version:	2.1.7
+Release:	2
+Source0:	http://www.freedesktop.org/software/geoclue/releases/2.1/geoclue-%{version}.tar.xz
+# Source0-md5:	684ca62c4e7b13ebe419d66e5c2e493c
 License:	GPL v2
 Group:		Applications
 URL:		http://geoclue.freedesktop.org/
+BuildRequires:	ModemManager-devel
 BuildRequires:	NetworkManager-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -45,9 +46,9 @@ Header files for development with geoclue.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
+# no MM in Freddix
 %configure \
-	--disable-schemas-compile	\
-	--disable-silent-rules		\
+	--disable-silent-rules	\
 	--disable-static
 %{__make}
 
@@ -65,12 +66,18 @@ rm -rf $RPM_BUILD_ROOT
 %doc README NEWS
 %dir %{_libexecdir}
 %attr(755,root,root) %{_libexecdir}/geoclue
+%dir %{_sysconfdir}/geoclue
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/geoclue/geoclue.conf
+%{systemdunitdir}/geoclue.service
+/etc/dbus-1/system.d/org.freedesktop.GeoClue2.conf
+/etc/dbus-1/system.d/org.freedesktop.GeoClue2.Agent.conf
+%{_datadir}/dbus-1/system-services/org.freedesktop.GeoClue2.service
 %{_sysconfdir}/dbus-1/system.d/org.freedesktop.GeoClue2.conf
 %{_datadir}/dbus-1/system-services
 
 %files devel
 %defattr(644,root,root,755)
-%dir %{_datadir}/geoclue-2.0
-%{_datadir}/geoclue-2.0/geoclue-interface.xml
 %{_pkgconfigdir}/geoclue-2.0.pc
+%{_datadir}/dbus-1/interfaces/org.freedesktop.GeoClue2.xml
+%{_datadir}/dbus-1/interfaces/org.freedesktop.GeoClue2.Agent.xml
 
