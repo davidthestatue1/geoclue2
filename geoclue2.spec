@@ -1,9 +1,9 @@
 Summary:	Geoinformation service
 Name:		geoclue2
-Version:	2.1.7
-Release:	2
+Version:	2.1.8
+Release:	1
 Source0:	http://www.freedesktop.org/software/geoclue/releases/2.1/geoclue-%{version}.tar.xz
-# Source0-md5:	684ca62c4e7b13ebe419d66e5c2e493c
+# Source0-md5:	49096b9c3c2458b5e8e36b886983d9aa
 License:	GPL v2
 Group:		Applications
 URL:		http://geoclue.freedesktop.org/
