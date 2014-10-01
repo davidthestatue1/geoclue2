@@ -1,7 +1,7 @@
 Summary:	Geoinformation service
 Name:		geoclue2
 Version:	2.1.8
-Release:	1
+Release:	2
 Source0:	http://www.freedesktop.org/software/geoclue/releases/2.1/geoclue-%{version}.tar.xz
 # Source0-md5:	49096b9c3c2458b5e8e36b886983d9aa
 License:	GPL v2
@@ -14,6 +14,7 @@ BuildRequires:	automake
 BuildRequires:	dbus-glib-devel
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	glib-gio-gsettings
+BuildRequires:	json-glib
 BuildRequires:	libsoup-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel
@@ -21,8 +22,6 @@ BuildRequires:	libxslt-progs
 Requires(post,postun):	glib-gio-gsettings
 Requires:	dbus
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_libexecdir	%{_libdir}/geoclue2
 
 %description
 GeoClue is a D-Bus geoinformation service. The goal of the Geoclue
@@ -46,7 +45,6 @@ Header files for development with geoclue.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-# no MM in Freddix
 %configure \
 	--disable-silent-rules	\
 	--disable-static
