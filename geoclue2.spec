@@ -1,12 +1,13 @@
 Summary:	Geoinformation service
 Name:		geoclue2
 Version:	2.1.10
-Release:	1
+Release:	2
 Source0:	http://www.freedesktop.org/software/geoclue/releases/2.1/geoclue-%{version}.tar.xz
 # Source0-md5:	aaa6c7a2a48a8fa74838345722d80e9f
+Patch0:		%{name}-more-apps.patch
 License:	GPL v2
-Group:		Applications
 URL:		http://geoclue.freedesktop.org/
+Group:		Applications
 BuildRequires:	ModemManager-devel
 BuildRequires:	NetworkManager-devel
 BuildRequires:	autoconf
@@ -19,7 +20,7 @@ BuildRequires:	libsoup-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel
 BuildRequires:	libxslt-progs
-Requires(post,postun):	glib-gio-gsettings
+Requires(post,preun,postun):	systemd-units
 Requires:	dbus
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -38,6 +39,7 @@ Header files for development with geoclue.
 
 %prep
 %setup -qn geoclue-%{version}
+%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -58,6 +60,15 @@ rm -rf $RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+%systemd_post geoclue.service
+
+%preun
+%systemd_preun geoclue.service
+
+%postun
+%systemd_postun
 
 %files
 %defattr(644,root,root,755)

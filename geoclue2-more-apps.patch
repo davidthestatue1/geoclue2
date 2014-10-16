@@ -1,0 +1,22 @@
+diff -aurN geoclue-2.1.10.orig/data/geoclue.conf.in geoclue-2.1.10/data/geoclue.conf.in
+--- geoclue-2.1.10.orig/data/geoclue.conf.in	2014-10-13 14:35:50.000000000 +0200
++++ geoclue-2.1.10/data/geoclue.conf.in	2014-10-13 14:42:47.000000000 +0200
+@@ -65,3 +65,18 @@
+ allowed=true
+ system=false
+ users=
++
++[gnome-clocks]
++allowed=true
++system=false
++users=
++
++[gnome-maps]
++allowed=true
++system=false
++users=
++
++[gnome-weather]
++allowed=true
++system=false
++users=
